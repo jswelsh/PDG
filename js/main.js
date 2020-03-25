@@ -4,7 +4,7 @@ const empties = document.querySelectorAll('.empty');
 
 //Fill Listeners
 fill.addEventListener('dragstart', dragStart);
-fill.addEventListener('dragEnd', dragEnd);
+fill.addEventListener('dragend', dragEnd);
 
 //Loop through empties and call drag events
 for(const empty of empties) {
@@ -17,22 +17,24 @@ for(const empty of empties) {
 //Drag Functions
 function dragStart() {
     this.className += ' hold';
-    setTimeout(() => this.className = 'invisible', 0);
+    setTimeout(() => (this.className = 'invisible'), 0);
 }
 
 function dragEnd() {
     this.className = 'fill';
 }
 
-function dragOver(){
-
+function dragOver(e){
+    e.preventDefault();
 }
-function dragEnter(){
-    
+function dragEnter(e){
+    e.preventDefault();
+    this.className += ' hovered';
 }
 function dragLeave(){
-    
+    this.className = 'empty';
 }
 function dragDrop(){
-    
+    this.className = 'empty';
+    this.append(fill)
 }
